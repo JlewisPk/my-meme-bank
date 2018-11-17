@@ -11,13 +11,12 @@ export default class MemeList extends React.Component<IProps, {}> {
         super(props)   
         this.searchByTag = this.searchByTag.bind(this)
     }
-
 	public render() {
 		return (
 			<div className="container meme-list-wrapper">
                 <div className="row meme-list-heading">
                     <div className="input-group">
-                        <input type="text" id="search-tag-textbox" className="form-control" placeholder="Search By Tags" />
+                        <input type="text" onKeyPress={this.handleKeyPress} id="search-tag-textbox" className="form-control" placeholder="Search By Tags" />
                         <div className="input-group-append">
                             <div className="btn btn-outline-secondary search-button" onClick = {this.searchByTag}>Search</div>
                         </div>
@@ -34,6 +33,11 @@ export default class MemeList extends React.Component<IProps, {}> {
 		);
     }
 
+    private handleKeyPress = (event: any) => {
+        if(event.key === 'Enter'){
+          this.searchByTag()
+        }
+      }
     // Construct table using meme list
 	private createTable() {
         const table:any[] = []
